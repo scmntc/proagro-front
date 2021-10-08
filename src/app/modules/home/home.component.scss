@@ -1,0 +1,88 @@
+.home-page {
+  .background-img {
+    background-image: url(https://i.imgur.com/s8qzh9r.png);
+  }
+
+  .center-card {
+    max-width: 660px;
+    margin: auto;
+    height: 100vh;
+    display: flex;
+    border-radius: 16px;
+    place-content: center;
+
+    .card-login {
+      width: 550px;
+      height: 70%;
+      align-self: center;
+
+      .p-card {
+        box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    & .form-css {
+      text-align-last: center;margin-top: 3em;display: flex;flex-flow: column
+    }
+
+    & .login-input {
+      width: 80%;
+      font-size: 16px;
+      height: 3em;
+      text-align-last: start;
+
+      div {
+        width: 80%;
+        height: 3em;
+
+        input {
+          width: 100%;
+        }
+      }
+    }
+
+    .welcome-text {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 300;
+      font-size: 32px;
+      line-height: 48px;
+      margin-top: 1.5em;
+      text-align: center;
+    }
+
+    & .logo-proagro {
+      text-align-last: center;
+    }
+
+    & .forgot-pwd {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 16px;
+      color: #07AA43;
+      margin-top: 0.5em;
+      margin-left: 3.3rem;
+      text-align-last: start;
+    }
+
+    & .btn-line {
+
+      margin: 4rem 2.8em 2em 2.8em;
+
+      div:nth-child(2) > button {
+        background-color: #07AA43;
+        color: white;
+      }
+
+      & .btn-criar-conta {
+        background: transparent;
+        color: #07AA43;
+        height: 48px;
+        border-color: rgb(0 0 0 / 12%);
+        border-radius: 8px;
+      }
+    }
+  }
+}
