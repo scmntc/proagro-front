@@ -3,7 +3,7 @@ import {takeUntil} from "rxjs/operators";
 import {ProdutorRural} from "../../../../model/produtor-rural";
 import {ProdutorRuralService} from "../../../../services/produtor-rural.service";
 import {Subject} from "rxjs";
-import {MenuItem} from "primeng/api";
+import {ConfirmationService, MenuItem, MessageService} from "primeng/api";
 import {Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 
@@ -19,11 +19,14 @@ export class ProdutorRuralListaComponent implements OnInit {
   value: ProdutorRural[] = [];
   cols: any[] = [];
   path: MenuItem[] = [];
+  _loading: boolean = false;
 
   constructor(
     public service: ProdutorRuralService,
     private router: Router,
-    private title: Title
+    private confirmationService: ConfirmationService,
+    private title: Title,
+    private messageService: MessageService
   ) {
     this.title.setTitle("Cadastro - Produtor Rural");
   }
@@ -73,7 +76,43 @@ export class ProdutorRuralListaComponent implements OnInit {
   }
 
   excluir(produtor: ProdutorRural) {
+    if (produtor) {
+      this.confirmationService.confirm({
+        header: 'Atenção',
+        acceptLabel: 'Sim',
+        rejectLabel: 'Não',
+        acceptIcon: 'pi pi-check',
+        rejectIcon: 'pi pi-times',
+        message: 'Tem certeza que deseja excluir o registro?',
+        accept: (event: Event) => {
+          this.aceitarExclusao(produtor);
+        }
+      })
+    }
+  }
 
+  private aceitarExclusao(produtor: ProdutorRural) {
+    if (produtor.id != null) {
+      this._loading = true;
+      this.service.delete(produtor.id)
+        .pipe(
+          takeUntil(this.ngUnsubscribe$)
+        ).subscribe(deleted => {
+        let idx = this.value.indexOf(produtor);
+        this.value.splice(idx, 1);
+        this._loading = false;
+        this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registro deletado!'});
+      }, error => {
+        this._loading = false;
+        this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Ocorreu um erro ao deletar o registro!'});
+        console.log(error);
+      })
+    }
+  }
+
+  getScrollHeight(): string {
+    let fullHeight = window.innerHeight;
+    return `${fullHeight - 450}px`;
   }
 
 }

@@ -2,6 +2,7 @@
   <div style="margin-top: 140px" class="col-12">
     <p-breadcrumb [model]="path"></p-breadcrumb>
     <p-card class="remove-p">
+      <p-progressBar mode="indeterminate" *ngIf="_loading"></p-progressBar>
       <p-card>
         <div class="col-12 flex flex-row relative">
           <div class="col-3">
@@ -21,13 +22,13 @@
             ></button>
           </div>
         </div>
-        <p-table [columns]="cols" [value]="value" class="mt-2 p-3">
+        <p-table [columns]="cols" [value]="value" class="mt-2 p-3" [scrollable]="true" [scrollHeight]="getScrollHeight()">
           <ng-template pTemplate="header" let-columns>
             <tr>
               <th *ngFor="let col of columns" [style]="{'text-align': col.align, 'width': col.width}">
                 {{ col.header }}
               </th>
-              <th [style.width]="'7%'"></th>
+              <th [style.width]="'5%'"></th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-produtor let-columns="columns">
@@ -40,14 +41,8 @@
                   {{ produtor[col.field] }}
                 </ng-template>
               </td>
-              <td>
+              <td class="flex end" style="place-content: end;">
                 <div class="flex flex-row">
-                  <button
-                    pButton
-                    icon="far fa-folder-open"
-                    class="p-button-text"
-                    (click)="service.abrir(produtor)"
-                  ></button>
                   <button
                     pButton
                     icon="fas fa-edit"
@@ -57,7 +52,7 @@
                   <button
                     pButton
                     icon="fas fa-trash-alt"
-                    class="p-button-text"
+                    class="p-button-text p-button-danger"
                     (click)="excluir(produtor)"
                   ></button>
                 </div>

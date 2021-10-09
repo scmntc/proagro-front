@@ -10,7 +10,9 @@ import {SidebarModule} from "primeng/sidebar";
 import { MenuComponent } from './components/menu/menu.component';
 import {ButtonModule} from "primeng/button";
 import {MenubarModule} from "primeng/menubar";
-import {MessageService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
+import {ToastModule} from "primeng/toast";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 @NgModule({
   declarations: [
@@ -25,10 +27,13 @@ import {MessageService} from "primeng/api";
     HttpClientModule,
     SidebarModule,
     ButtonModule,
-    MenubarModule
+    MenubarModule,
+    ToastModule,
+    ConfirmDialogModule
   ],
   providers: [
-    MessageService
+    MessageService,
+    ConfirmationService
   ],
   bootstrap: [AppComponent]
 })

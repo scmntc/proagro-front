@@ -21,8 +21,4 @@ export class ProdutorRuralService extends CrudService<ProdutorRural, number> {
     this.route.navigate(["/cadastro/produtor-rural/cadastro-prod-rural"], { queryParams: {id: obj.id, editable: true} });
   }
 
-  abrir(obj: any) {
-    this.route.navigate(["/cadastro/produtor-rural/cadastro-prod-rural"], { queryParams: {id: obj.id, editable: false} });
-  }
-
 }

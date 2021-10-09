@@ -20,13 +20,15 @@ export class ProdutorRuralCadastroComponent implements OnInit, OnDestroy {
 
   value: ProdutorRural = new ProdutorRural();
   path: MenuItem[] = [];
-
+  _loading: boolean = false;
   formProdutor = this.fb.group({
     id: [this.value.id],
     nome: [this.value.nome, [Validators.required, Validators.nullValidator]],
     email: [this.value.email, [Validators.email, Validators.required]],
     cpf: [this.value.cpf, this.validateCpfCnpj]
   });
+
+
 
   constructor(
     private title: Title,
@@ -55,10 +57,19 @@ export class ProdutorRuralCadastroComponent implements OnInit, OnDestroy {
         takeUntil(this.ngUnsubscribe$)
       ).subscribe(params => {
       if (params.id) {
-        this.service.findOne(params.id).pipe(takeUntil(this.ngUnsubscribe$)).subscribe((produtor: any) => {
-          if (produtor) {
-            this.updateValue(produtor[0]);
-          }
+        this._loading = true;
+        this.service.findOne(params.id)
+          .pipe(
+            takeUntil(this.ngUnsubscribe$)
+          ).subscribe((produtor: any) => {
+            if (produtor) {
+              this.title.setTitle(`Cadastro: ${produtor.id} - Produtor Rural`);
+              this.updateValue(produtor[0]);
+              this._loading = false;
+            }
+        }, error => {
+            console.log(error);
+            this._loading = false;
         })
       }
     });
@@ -84,9 +95,17 @@ export class ProdutorRuralCadastroComponent implements OnInit, OnDestroy {
 
   salvar() {
     if (this.isFormularioValido()) {
+      this._loading = true;
       this.service.save(this.formProdutor.value).pipe(takeUntil(this.ngUnsubscribe$)).subscribe(salvo => {
-        console.log(salvo);
+        this._loading = false;
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sucesso',
+          detail: `O registro foi salvo com sucesso!`
+        });
+        this.cancelar();
       }, error => {
+        this._loading = false;
         console.log(error);
       })
     }

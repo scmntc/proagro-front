@@ -12,6 +12,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {MessageModule} from "primeng/message";
 import {MessagesModule} from "primeng/messages";
 import {ToastModule} from "primeng/toast";
+import {ProgressBarModule} from "primeng/progressbar";
 
 const routes: Routes = [
   {
@@ -39,7 +40,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     MessageModule,
     MessagesModule,
-    ToastModule
+    ToastModule,
+    ProgressBarModule
   ],
   exports: [
     ProdutorRuralCadastroComponent,

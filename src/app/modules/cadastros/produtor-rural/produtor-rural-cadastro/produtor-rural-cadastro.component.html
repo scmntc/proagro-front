@@ -3,7 +3,7 @@
   <div style="margin-top: 140px" class="col-12">
     <p-breadcrumb [model]="path"></p-breadcrumb>
     <div class="mt-3"></div>
-    <p-card style="width: 100%">
+    <p-card [style.width]="'100%'">
       <form [formGroup]="formProdutor">
         <div class="flex p-card-title">
           <h3>Cadastro de Produtor Rural</h3>
@@ -11,7 +11,7 @@
         <div class="col-12 flex p-fluid">
           <div class="col-2 flex flex-column">
             <label class="mb-1">Código</label>
-            <input pInputText formControlName="id"/>
+            <input pInputText formControlName="id" [readonly]="true"/>
           </div>
           <div class="col-5 flex flex-column">
             <label class="mb-1">Nome</label>
@@ -42,6 +42,7 @@
                 pButton
                 type="submit"
                 label="Salvar"
+                [disabled]="_loading"
                 (click)="salvar()"
                 class="p-button-success">
               </button>
