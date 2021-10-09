@@ -4,6 +4,8 @@ import {ProdutorRural} from "../../../../model/produtor-rural";
 import {ProdutorRuralService} from "../../../../services/produtor-rural.service";
 import {Subject} from "rxjs";
 import {MenuItem} from "primeng/api";
+import {Router} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-produtor-rural-lista',
@@ -18,7 +20,13 @@ export class ProdutorRuralListaComponent implements OnInit {
   cols: any[] = [];
   path: MenuItem[] = [];
 
-  constructor(private produtorRuralService: ProdutorRuralService) { }
+  constructor(
+    public service: ProdutorRuralService,
+    private router: Router,
+    private title: Title
+  ) {
+    this.title.setTitle("Cadastro - Produtor Rural");
+  }
 
   ngOnInit(): void {
     this.cols = [
@@ -45,10 +53,10 @@ export class ProdutorRuralListaComponent implements OnInit {
     this.path = [
       { icon: 'pi pi-home'},
       {label:'Cadastros'},
-      {label:'Produtor Rural'}
+      {label:'Produtor Rural', routerLink: "/cadastro/produtor-rural/lista-prod-rural"}
     ];
 
-    this.produtorRuralService.findAll()
+    this.service.findAll()
       .pipe(
         takeUntil(this.ngUnsubscribe$)
       ).subscribe((registros: ProdutorRural[]) => {
@@ -58,6 +66,14 @@ export class ProdutorRuralListaComponent implements OnInit {
 
   getFormatCPF(cpf: string) {
     return ProdutorRural.formatarCPF(cpf);
+  }
+
+  incluirNovo() {
+    this.router.navigate(["/cadastro/produtor-rural/cadastro-prod-rural"]);
+  }
+
+  excluir(produtor: ProdutorRural) {
+
   }
 
 }

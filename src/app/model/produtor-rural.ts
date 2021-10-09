@@ -1,4 +1,6 @@
 export class ProdutorRural {
+  id?: number;
+  deletado: boolean = false;
   nome: string = "";
   email: string = "";
   cpf: string = "";

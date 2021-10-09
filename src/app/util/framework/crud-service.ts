@@ -30,4 +30,8 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     return this._http.delete<T>(this._base + '?' + id);
   }
 
+  abstract edit(obj: any): void;
+
+  abstract abrir(obj: any): void;
+
 }

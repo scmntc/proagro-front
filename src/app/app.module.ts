@@ -9,9 +9,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {SidebarModule} from "primeng/sidebar";
 import { MenuComponent } from './components/menu/menu.component';
 import {ButtonModule} from "primeng/button";
-import {PanelModule} from "primeng/panel";
-import {PanelMenuModule} from "primeng/panelmenu";
 import {MenubarModule} from "primeng/menubar";
+import {MessageService} from "primeng/api";
 
 @NgModule({
   declarations: [
@@ -28,7 +27,9 @@ import {MenubarModule} from "primeng/menubar";
     ButtonModule,
     MenubarModule
   ],
-  providers: [],
+  providers: [
+    MessageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

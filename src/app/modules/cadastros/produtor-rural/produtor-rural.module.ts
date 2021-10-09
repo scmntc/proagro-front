@@ -6,8 +6,12 @@ import {RouterModule, Routes} from "@angular/router";
 import {CardModule} from "primeng/card";
 import {TableModule} from "primeng/table";
 import {ButtonModule} from "primeng/button";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BreadcrumbModule} from "primeng/breadcrumb";
+import {InputTextModule} from "primeng/inputtext";
+import {MessageModule} from "primeng/message";
+import {MessagesModule} from "primeng/messages";
+import {ToastModule} from "primeng/toast";
 
 const routes: Routes = [
   {
@@ -30,7 +34,12 @@ const routes: Routes = [
     TableModule,
     ButtonModule,
     FormsModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    InputTextModule,
+    ReactiveFormsModule,
+    MessageModule,
+    MessagesModule,
+    ToastModule
   ],
   exports: [
     ProdutorRuralCadastroComponent,
