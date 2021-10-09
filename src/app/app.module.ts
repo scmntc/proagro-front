@@ -9,6 +9,9 @@ import {HttpClientModule} from "@angular/common/http";
 import {SidebarModule} from "primeng/sidebar";
 import { MenuComponent } from './components/menu/menu.component';
 import {ButtonModule} from "primeng/button";
+import {PanelModule} from "primeng/panel";
+import {PanelMenuModule} from "primeng/panelmenu";
+import {MenubarModule} from "primeng/menubar";
 
 @NgModule({
   declarations: [
@@ -22,7 +25,8 @@ import {ButtonModule} from "primeng/button";
     CdkScrollableModule,
     HttpClientModule,
     SidebarModule,
-    ButtonModule
+    ButtonModule,
+    MenubarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

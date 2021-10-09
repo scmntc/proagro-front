@@ -29,6 +29,10 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
+
+* {
+  font-family: Poppins;
+}
 body {
   line-height: 1;
 }
@@ -46,4 +50,10 @@ q:before, q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+.primary-btn {
+  background: #ffbf01 !important;
+  border: none !important;
+  box-shadow: none !important;
 }

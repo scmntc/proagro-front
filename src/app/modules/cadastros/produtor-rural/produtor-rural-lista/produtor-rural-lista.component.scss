@@ -1,0 +1,17 @@
+.remove-p {
+  padding: 0;
+
+
+  > div {
+    padding: 0 !important;
+    margin-top: 1.5em;
+
+    > div {
+      padding: 0 !important;
+
+      > div {
+        padding: 0 !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+<div class="flex">
+  <div style="margin-top: 140px;" class="col-12">
+    <p-breadcrumb [model]="path"></p-breadcrumb>
+    <p-card class="remove-p">
+      <p-card>
+        <div class="col-12 flex flex-row">
+          <div class="col-3">
+            <div class="p-card-title">Lista - Produtores Rurais</div>
+          </div>
+          <div class="col-6"></div>
+          <div class="col-3" style="text-align: end;">
+            <button pButton class="primary-btn" label="Incluir Novo"></button>
+          </div>
+        </div>
+        <p-table [columns]="cols" [value]="value" class="mt-2 p-3">
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns">
+                {{col.header}}
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-produtor let-columns="columns">
+            <tr>
+              <td *ngFor="let col of columns">
+              <span *ngIf="col.field == 'cpf';else semFormatField">
+                {{getFormatCPF(produtor[col.field])}}
+              </span>
+                <ng-template #semFormatField>
+                  {{produtor[col.field]}}
+                </ng-template>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-card>
+    </p-card>
+  </div>
+</div>
