@@ -5,17 +5,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CdkScrollableModule, ScrollingModule} from "@angular/cdk/scrolling";
+import {HttpClientModule} from "@angular/common/http";
+import {SidebarModule} from "primeng/sidebar";
+import { MenuComponent } from './components/menu/menu.component';
+import {ButtonModule} from "primeng/button";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MenuComponent
   ],
   imports: [
-    BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     ScrollingModule,
-    CdkScrollableModule
+    CdkScrollableModule,
+    HttpClientModule,
+    SidebarModule,
+    ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

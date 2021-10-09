@@ -5,6 +5,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {CardModule} from "primeng/card";
 import {AutoCompleteModule} from "primeng/autocomplete";
 import {ScrollingModule} from "@angular/cdk/scrolling";
+import {AutocompleteEditModule} from "../autocomplete-edit/autocomplete-edit.module";
 
 const routes: Routes = [
   { path: '', component: ComunicacaoPerdaComponent }
@@ -19,7 +20,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     CardModule,
     AutoCompleteModule,
-    ScrollingModule
+    ScrollingModule,
+    AutocompleteEditModule
   ]
 })
 export class ComunicacaoPerdaModule { }
