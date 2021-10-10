@@ -4,7 +4,7 @@ import {NavigationStart, Router} from "@angular/router";
 
 /* Só para simular o acesso. */
 const whiteListMenu = [
-  "/home",
+  "/comunicacao-perda",
   "/cadastro/"
 ];
 

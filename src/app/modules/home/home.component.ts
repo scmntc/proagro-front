@@ -16,6 +16,6 @@ export class HomeComponent implements OnInit {
 
 
   goHome() {
-    this.route.navigate(["/home"]);
+    this.route.navigate(["/comunicacao-perda/lista-comunicacao-perda"]);
   }
 }

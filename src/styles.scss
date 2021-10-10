@@ -33,8 +33,11 @@ footer, header, hgroup, menu, nav, section {
 * {
   font-family: Poppins;
 }
+
+
 body {
   line-height: 1;
+  font-family: Poppins;
 }
 ol, ul {
   list-style: none;
@@ -52,10 +55,72 @@ table {
   border-spacing: 0;
 }
 
+.bg {
+  background-color: #FAFAFA;
+}
+
+.title-cadastro {
+  font-size: 18px;
+  font-family: 'Poppins';
+  font-weight: 400;
+}
+
+.p-card .p-card-title {
+  font-family: Poppins !important;
+  font-weight: 500 !important;
+  white-space: nowrap !important;
+}
+.p-fluid .p-dropdown .p-dropdown-label {
+  width: 1%;
+  height: 37px;
+  margin-top: 1px;
+}
+.p-button-label {
+  font-family: Poppins;
+}
+
+.comunicacao-perda-component {
+  .p-datepicker:not(.p-datepicker-inline) {
+    left: -140% !important;
+  }
+}
+
+.remove-p {
+  padding: 0;
+
+  & > p-card {
+    background-color: red;
+    box-shadow: 0 2px 4px #00000026;
+  }
+
+  > div {
+    padding: 0 !important;
+    margin-top: 1em;
+
+    > div {
+      padding: 0 !important;
+
+      > div {
+        padding: 0 !important;
+      }
+    }
+  }
+}
+
+
 .primary-btn {
   background: #ffbf01 !important;
   border: none !important;
   box-shadow: none !important;
+}
+
+.p-card {
+  box-shadow: 0 2px 4px #00000026 !important;
+  border-radius: 3px;
+}
+
+.p-button {
+  max-width: 190px;
 }
 
 .p-progressbar .p-progressbar-value {

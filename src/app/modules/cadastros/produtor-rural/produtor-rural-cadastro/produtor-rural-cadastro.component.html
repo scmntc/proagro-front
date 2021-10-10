@@ -1,12 +1,14 @@
 <p-toast></p-toast>
-<div class="flex">
+<div class="flex bg">
   <div style="margin-top: 140px" class="col-12">
     <p-breadcrumb [model]="path"></p-breadcrumb>
     <div class="mt-3"></div>
     <p-card [style.width]="'100%'">
       <form [formGroup]="formProdutor">
         <div class="flex p-card-title">
-          <h3>Cadastro de Produtor Rural</h3>
+          <div class="title-cadastro">Cadastro de Produtor Rural
+            <span *ngIf="value?.id"> - Código {{value.id}}</span>
+          </div>
         </div>
         <div class="col-12 flex p-fluid">
           <div class="col-2 flex flex-column">
@@ -37,7 +39,7 @@
               ></button>
             </div>
             <div class="col-6"></div>
-            <div class="col-3">
+            <div class="col-3 text-right">
               <button
                 pButton
                 type="submit"

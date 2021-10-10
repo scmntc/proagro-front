@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {takeUntil} from "rxjs/operators";
 import {ProdutorRural} from "../../../../model/produtor-rural";
-import {ProdutorRuralService} from "../../../../services/produtor-rural.service";
+import {ProdutorRuralService} from "../../../../services/produtor-rural/produtor-rural.service";
 import {Subject} from "rxjs";
 import {ConfirmationService, MenuItem, MessageService} from "primeng/api";
 import {Router} from "@angular/router";

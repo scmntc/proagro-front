@@ -29,7 +29,7 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
     ButtonModule,
     MenubarModule,
     ToastModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
   ],
   providers: [
     MessageService,

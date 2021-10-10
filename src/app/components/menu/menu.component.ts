@@ -45,7 +45,7 @@ export class MenuComponent implements OnInit {
           {
             label: 'Comunicação de Perda',
             command: (event: Event) => {
-              this.router.navigate(["/home"]);
+              this.router.navigate(["/comunicacao-perda/lista-comunicacao-perda"]);
             }
           },
         ]

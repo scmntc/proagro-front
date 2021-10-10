@@ -4,7 +4,7 @@ import {Title} from "@angular/platform-browser";
 import {ActivatedRoute, Router} from "@angular/router";
 import {takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs";
-import {ProdutorRuralService} from "../../../../services/produtor-rural.service";
+import {ProdutorRuralService} from "../../../../services/produtor-rural/produtor-rural.service";
 import {ProdutorRural} from "../../../../model/produtor-rural";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {cnpj, cpf} from 'cpf-cnpj-validator'
@@ -64,7 +64,7 @@ export class ProdutorRuralCadastroComponent implements OnInit, OnDestroy {
           ).subscribe((produtor: any) => {
             if (produtor) {
               this.title.setTitle(`Cadastro: ${produtor.id} - Produtor Rural`);
-              this.updateValue(produtor[0]);
+              this.updateValue(produtor);
               this._loading = false;
             }
         }, error => {

@@ -1,17 +1,21 @@
-.remove-p {
-  padding: 0;
-
-
-  > div {
-    padding: 0 !important;
-    margin-top: 1em;
-
-    > div {
-      padding: 0 !important;
-
-      > div {
-        padding: 0 !important;
-      }
-    }
-  }
-}
+//.remove-p {
+//  padding: 0;
+//
+//  & > p-card {
+//    background-color: red;
+//    box-shadow: 0 2px 4px #00000026;
+//  }
+//
+//  > div {
+//    padding: 0 !important;
+//    margin-top: 1em;
+//
+//    > div {
+//      padding: 0 !important;
+//
+//      > div {
+//        padding: 0 !important;
+//      }
+//    }
+//  }
+//}

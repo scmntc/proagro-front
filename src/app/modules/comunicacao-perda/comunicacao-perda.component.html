@@ -1,16 +1,107 @@
-<div class="flex comunicacao-perda">
-  <div class="m-auto" style="place-self: center">
-    <p-card class="w-6 box-shadow-cstm">
-      <div class="p-card-title">
-        Comunicação de Perda
-      </div>
-      <div class="p-card-body">
-        <div class="flex flex-row p-fluid p-grid">
-          <div class="col-12">
-            <app-autocomplete-edit label="Nome"></app-autocomplete-edit>
+<<p-toast></p-toast>
+<div class="flex bg comunicacao-perda-component">
+  <div style="margin-top: 140px" class="col-12">
+    <p-breadcrumb [model]="path"></p-breadcrumb>
+    <div class="mt-3"></div>
+    <p-card [style.width]="'100%'">
+      <form [formGroup]="formComunicacao">
+        <div class="flex p-card-title">
+          <div class="title-cadastro">Cadastro de Comunicação de Perda
+            <span *ngIf="_value?.id"> - Código {{_value.id}}</span>
           </div>
         </div>
-      </div>
+        <div class="col-12 pb-0 mb-0">
+          <div class="col-12 flex flex-row p-0">
+            <form formGroupName="produtorRural" class="flex col-10 p-fluid">
+
+              <div class="col-5 flex flex-column">
+                <label class="mb-1">Produtor Rural</label>
+                <p-autoComplete
+                  formControlName="nome"
+                  [suggestions]="suggestions"
+                  (onSelect)="onSelect($event)"
+                  (completeMethod)="searchProdutorRural($event)">
+                  <ng-template let-brand pTemplate="item">
+                    <div>{{brand.nome}}</div>
+                  </ng-template>
+                </p-autoComplete>
+              </div>
+              <div class="col-4 flex flex-column">
+                <label class="mb-1">E-mail</label>
+                <input pInputText formControlName="email" [readOnly]="true"/>
+              </div>
+              <div class="col-3 flex flex-column">
+                <label class="mb-1">CPF</label>
+                <input pInputText formControlName="cpf" [readOnly]="true"/>
+              </div>
+            </form>
+            <div class="col-2 flex">
+              <div class="col-12 p-fluid flex flex-column">
+                <label class="mb-1">Data da Colheita</label>
+                <p-calendar [formControlName]="'dataColheita'" [dateFormat]="'dd/m/yy'"></p-calendar>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 flex flex-row p-fluid pt-0">
+            <div class="col-4">
+              <div class="col-4 pl-0 p-fluid" [style.width]="'100%'">
+                <div class="col-12 flex flex-column p-0 p-fluid">
+                  <label class="mb-1">Evento Ocorrido</label>
+                  <p-dropdown [editable]="false" [options]="eventos" formControlName="eventoOcorrido"></p-dropdown>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="col-4 pl-0 p-fluid" [style.width]="'100%'">
+                <form formGroupName="tipoLavoura" class="col-12 flex flex-column p-0 p-fluid">
+                  <label class="mb-1">Tipo da Lavoura</label>
+                  <p-dropdown
+                    [editable]="true"
+                    (select)="onChangeTipoLavoura($event)"
+                    emptyMessage="Sem resultados encontrados"
+                    (onChange)="onChangeTipoLavoura($event)"
+                    [options]="tiposLavoura"
+                    formControlName="descricao">
+                  </p-dropdown>
+                </form>
+              </div>
+            </div>
+            <div class="col-4 flex flex-row pl-0 pr-0">
+              <div class="col-6 flex flex-column">
+                <label class="mb-1">Localização (Latitude)</label>
+                <input pInputText formControlName="latitude"/>
+              </div>
+              <div class="col-6 flex flex-column">
+                <label class="mb-1">Localização (Longitude)</label>
+                <input pInputText formControlName="longitude"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-fluid">
+          <div class="col-12 flex">
+            <div class="col-3">
+              <button
+                pButton
+                (click)="cancelar()"
+                class="p-button-danger p-button-outlined"
+                label="Cancelar"
+              ></button>
+            </div>
+            <div class="col-6"></div>
+            <div class="col-3 text-right">
+              <button
+                pButton
+                type="submit"
+                label="Salvar"
+                [disabled]="_loading"
+                (click)="salvar()"
+                class="p-button-success">
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
     </p-card>
   </div>
 </div>

@@ -4,22 +4,25 @@
     <p-card class="remove-p">
       <p-progressBar mode="indeterminate" *ngIf="_loading"></p-progressBar>
       <p-card>
-        <div class="col-12 flex flex-row relative">
+        <div class="col-12 flex flex-row relative" style="place-items: center">
           <div class="col-3">
-            <div class="p-card-title">Lista - Produtores Rurais</div>
+            <div class="p-card-title">Lista - Comunicação de Perda</div>
           </div>
-          <div class="col-6"></div>
-          <div
-            class="col-3"
-            style="text-align: end; right: 1em"
-            class="absolute"
-          >
-            <button
-              pButton
-              class="primary-btn h-2rem"
-              label="Incluir Novo"
-              (click)="incluirNovo()"
-            ></button>
+          <div class="col-3"></div>
+          <div class="col-6 p-fluid flex flex-row">
+            <input pInputText class="h-2rem" placeholder="Pesquisar por CPF do Produtor"/>
+            <div
+              class="col-3 p-0 pl-1"
+              style="text-align: end; right: 1em"
+            >
+              <button
+                pButton
+                class="primary-btn h-2rem"
+                label="Incluir Novo"
+                (click)="incluirNovo()"
+              ></button>
+            </div>
+
           </div>
         </div>
         <p-table [columns]="cols" [value]="value" class="mt-2 p-3" [scrollable]="true" [scrollHeight]="getScrollHeight()">
@@ -31,14 +34,14 @@
               <th [style.width]="'5%'"></th>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-produtor let-columns="columns">
+          <ng-template pTemplate="body" let-comunicacaoperda let-columns="columns">
             <tr>
               <td *ngFor="let col of columns" [style]="{'text-align': col.align, 'width': col.width}">
-                <span *ngIf="col.field == 'cpf'; else semFormatField">
-                  {{ getFormatCPF(produtor[col.field]) }}
-                </span>
-                <ng-template #semFormatField>
-                  {{ produtor[col.field] }}
+                <div *ngIf="col && col.tipo == 'date'; else normalField">
+                  {{ getField(comunicacaoperda, col.field) | date: 'dd/MM/YYYY'}}
+                </div>
+                <ng-template #normalField>
+                  {{ getField(comunicacaoperda, col.field) }}
                 </ng-template>
               </td>
               <td class="flex end" style="place-content: end;">
@@ -47,16 +50,17 @@
                     pButton
                     icon="fas fa-pencil"
                     class="p-button-text"
-                    (click)="service.edit(produtor)"
+                    (click)="service.edit(comunicacaoperda)"
                   ></button>
                   <button
                     pButton
                     icon="far fa-trash-alt"
                     class="p-button-text p-button-danger"
-                    (click)="excluir(produtor)"
+                    (click)="excluir(comunicacaoperda)"
                   ></button>
                 </div>
               </td>
+
             </tr>
           </ng-template>
         </p-table>

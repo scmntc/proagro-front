@@ -15,11 +15,11 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
   update(id: ID, t: T): Observable<T> {
-    return this._http.put<T>(this._base + "?" + id, t, {});
+    return this._http.put<T>(this._base + "?id=" + id, t, {});
   }
 
   findOne(id: ID): Observable<T> {
-    return this._http.get<T>(this._base + "?" + id);
+    return this._http.get<T>(this._base + "?id=" + id);
   }
 
   findAll(): Observable<T[]> {
