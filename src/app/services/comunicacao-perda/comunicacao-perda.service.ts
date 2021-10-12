@@ -5,6 +5,7 @@ import {ComunicacaoPerda} from "../../model/comunicacao-perda";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {environment} from "../../../environments/environment";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,9 @@ export class ComunicacaoPerdaService extends CrudService<ComunicacaoPerda, numbe
 
   edit(obj: any) {
     this.route.navigate(["/comunicacao-perda/cadastro-comunicacao-perda"], { queryParams: {id: obj.id, editable: true} });
+  }
+
+  validarVeracidadeComunicacaoPerda(obj: ComunicacaoPerda): Observable<ComunicacaoPerda[]> {
+    return this._http.post<ComunicacaoPerda[]>(this._base.concat("/validar-veracidade-comunicacao"), obj);
   }
 }

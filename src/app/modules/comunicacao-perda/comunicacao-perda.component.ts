@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {ComunicacaoPerda} from "../../model/comunicacao-perda";
 import {Subject} from "rxjs";
-import {MenuItem, MessageService} from "primeng/api";
+import {ConfirmationService, MenuItem, MessageService} from "primeng/api";
 import {ActivatedRoute, Router} from "@angular/router";
 import {takeUntil} from "rxjs/operators";
 import {Title} from "@angular/platform-browser";
@@ -47,11 +47,11 @@ export class ComunicacaoPerdaComponent implements OnInit, OnDestroy {
   tiposLavoura: any[] = [];
   eventos = [
     {label: 'Chuva Excessiva', value: 'CHUVA_EXCESSIVA'},
-    {label: 'Geada', code: 'GEADA'},
-    {label: 'Granizo', code: 'GRANIZO'},
-    {label: 'Seca', code: 'SECA'},
-    {label: 'Vendaval', code: 'VENDAVEL'},
-    {label: 'Raio', code: 'RAIO'}
+    {label: 'Geada', value: 'GEADA'},
+    {label: 'Granizo', value: 'GRANIZO'},
+    {label: 'Seca', value: 'SECA'},
+    {label: 'Vendaval', value: 'VENDAVAL'},
+    {label: 'Raio', value: 'RAIO'}
   ];
 
   constructor(
@@ -62,7 +62,8 @@ export class ComunicacaoPerdaComponent implements OnInit, OnDestroy {
     private tipoLavouraService: TipoLavouraService,
     private title: Title,
     private fb: FormBuilder,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService
   ) {
   }
 
@@ -144,6 +145,20 @@ export class ComunicacaoPerdaComponent implements OnInit, OnDestroy {
     }
   }
 
+  onChangeEventoOcorrido(event: any) {
+    if (event?.value) {
+      let eventoOcorrido = this.eventos.filter(value => value?.value?.includes(event.value));
+      if (eventoOcorrido?.length == 1) {
+        // @ts-ignore
+        this._value.eventoOcorrido = eventoOcorrido[0]?.value;
+        this.formComunicacao.patchValue({eventoOcorrido:  eventoOcorrido[0].value});
+      } else {
+        this._value.eventoOcorrido = event.value;
+        this.formComunicacao.patchValue({eventoOcorrido:   this._value.tipoLavoura});
+      }
+    }
+  }
+
   onSelect(event: any) {
     this.formComunicacao.patchValue({
       produtorRural: event
@@ -165,24 +180,55 @@ export class ComunicacaoPerdaComponent implements OnInit, OnDestroy {
     }
   }
 
-  salvar() {
+  salvar(validarVeracidade: boolean = true) {
     if (this.isFormularioValido()) {
       this._loading = true;
-      this.service.save(this.formComunicacao.value)
-        .pipe(takeUntil(this.ngUnsubscribe$))
-        .subscribe(saved => {
-          this._loading = false;
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Sucesso',
-            detail: `O registro foi salvo com sucesso!`
+      if (validarVeracidade) {
+        this.service.validarVeracidadeComunicacaoPerda(this.formComunicacao.value)
+          .pipe(takeUntil(this.ngUnsubscribe$))
+          .subscribe((response: ComunicacaoPerda[]) => {
+            if (response && response.length > 0) {
+              let idsComunicacoesPerda = [];
+              for (const comunicacaoPerda of response) {
+                idsComunicacoesPerda.push(comunicacaoPerda.id);
+              }
+              this.confirmationService.confirm(
+                {
+                  accept: (event: Event) => this.salvar(false),
+                  acceptLabel: 'Salvar',
+                  rejectLabel: 'Cancelar',
+                  message: `Existem outra(s) comunicações de perda (Código(s): ${idsComunicacoesPerda.toString().replace(",", ", ")}) com esta data que diferem de evento ocorrido, deseja continuar?`,
+                  header: 'Verificação de veracidade',
+                  reject: (event: Event) => {
+                    this._loading = false;
+                  }
+                }
+              )
+            } else {
+              this.salvar(false);
+              this._loading = false;
+            }
+          }, error => {
+            this._loading = false;
           });
-          this.cancelar();
-      }, error => {
-          this._loading = false;
-          this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Ocorreu um erro ao salvar o registro!'});
-          console.log(error);
-        })
+      } else {
+        this.service.save(this.formComunicacao.value)
+          .pipe(takeUntil(this.ngUnsubscribe$))
+          .subscribe(saved => {
+            this._loading = false;
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Sucesso',
+              detail: `O registro foi salvo com sucesso!`
+            });
+            this.cancelar();
+          }, error => {
+            this._loading = false;
+            this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Ocorreu um erro ao salvar o registro!'});
+            console.log(error);
+          })
+
+      }
     }
   }
 
@@ -215,7 +261,6 @@ export class ComunicacaoPerdaComponent implements OnInit, OnDestroy {
       this.tiposLavoura = Object.values(tiposLavoura).map((key) => {
         return { label: key.descricao, value: key.descricao, id: key.id }
       })
-      console.log(this.tiposLavoura);
     })
   }
 }

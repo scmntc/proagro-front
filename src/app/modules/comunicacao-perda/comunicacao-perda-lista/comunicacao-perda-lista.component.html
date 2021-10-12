@@ -10,7 +10,12 @@
           </div>
           <div class="col-3"></div>
           <div class="col-6 p-fluid flex flex-row">
-            <input pInputText class="h-2rem" placeholder="Pesquisar por CPF do Produtor"/>
+            <input
+              pInputText
+              class="h-2rem"
+              [(ngModel)]="pesquisa"
+              (ngModelChange)="onChangePesquisaCPF($event)"
+              placeholder="Pesquisar por CPF do Produtor"/>
             <div
               class="col-3 p-0 pl-1"
               style="text-align: end; right: 1em"
@@ -35,7 +40,7 @@
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-comunicacaoperda let-columns="columns">
-            <tr>
+            <tr *ngIf="comunicacaoperda.show">
               <td *ngFor="let col of columns" [style]="{'text-align': col.align, 'width': col.width}">
                 <div *ngIf="col && col.tipo == 'date'; else normalField">
                   {{ getField(comunicacaoperda, col.field) | date: 'dd/MM/YYYY'}}

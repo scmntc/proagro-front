@@ -129,7 +129,6 @@ export class ProdutorRuralCadastroComponent implements OnInit, OnDestroy {
   }
 
   validateCpfCnpj(c: FormControl) {
-    console.log(c.value.replace(/[^\d]/g, ""));
     let isValid = false;
     if (c?.value && c.value.replace(/[^\d]/g, "").length == 11) {
       isValid = cpf.isValid(c.value);

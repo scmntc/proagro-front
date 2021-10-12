@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {MenuItem} from "primeng/api";
+import {ConfirmationService, MenuItem, MessageService} from "primeng/api";
 import {ComunicacaoPerdaService} from "../../../services/comunicacao-perda/comunicacao-perda.service";
 import {takeUntil} from "rxjs/operators";
 import {ComunicacaoPerda} from "../../../model/comunicacao-perda";
 import {Subject} from "rxjs";
-import { get } from 'lodash';
+import {get} from 'lodash';
 import {Router} from "@angular/router";
 
 @Component({
@@ -23,11 +23,14 @@ export class ComunicacaoPerdaListaComponent implements OnInit {
   value: ComunicacaoPerda[] = [];
   _loading: boolean = false;
   cols: any[] = [];
+  pesquisa: string = '';
   private ngUnsubscribe$: Subject<any> = new Subject<any>();
 
   constructor(
     public service: ComunicacaoPerdaService,
-    private route: Router
+    private route: Router,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -63,6 +66,9 @@ export class ComunicacaoPerdaListaComponent implements OnInit {
       .pipe(
         takeUntil(this.ngUnsubscribe$)
       ).subscribe((registros: ComunicacaoPerda[]) => {
+      for (const registro of registros) {
+        registro.show = true;
+      }
       this.value = registros;
     });
   }
@@ -72,7 +78,48 @@ export class ComunicacaoPerdaListaComponent implements OnInit {
   }
 
   excluir(comunicacaoperda: any) {
+    if (comunicacaoperda) {
+      this.confirmationService.confirm({
+        header: 'Atenção',
+        acceptLabel: 'Sim',
+        rejectLabel: 'Não',
+        acceptIcon: 'pi pi-check',
+        rejectIcon: 'pi pi-times',
+        message: 'Tem certeza que deseja excluir o registro?',
+        accept: (event: Event) => {
+          this.aceitarExclusao(comunicacaoperda);
+        }
+      })
+    }
+  }
 
+  onChangePesquisaCPF(event: any) {
+    this.value.forEach(value => {
+      if (value.produtorRural.cpf.includes(event)) {
+        value.show = true;
+      } else {
+        value.show = false;
+      }
+    })
+  }
+
+  private aceitarExclusao(comunicacaoPerda: ComunicacaoPerda) {
+    if (comunicacaoPerda.id != null) {
+      this._loading = true;
+      this.service.delete(comunicacaoPerda.id)
+        .pipe(
+          takeUntil(this.ngUnsubscribe$)
+        ).subscribe(deleted => {
+        let idx = this.value.indexOf(comunicacaoPerda);
+        this.value.splice(idx, 1);
+        this._loading = false;
+        this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registro deletado!'});
+      }, error => {
+        this._loading = false;
+        this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Ocorreu um erro ao deletar o registro!'});
+        console.log(error);
+      })
+    }
   }
 
   getScrollHeight(): string {

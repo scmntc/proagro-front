@@ -9,4 +9,5 @@ export class ComunicacaoPerda {
   tipoLavoura: TipoLavoura = new TipoLavoura();
   latitude: string = "";
   longitude: string = "";
+  show: boolean = true;  /* Somente para exibição */
 }

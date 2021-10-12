@@ -19,6 +19,7 @@ import {TranslateModule} from "@ngx-translate/core";
 import {AccordionModule} from "primeng/accordion";
 import {FieldsetModule} from "primeng/fieldset";
 import {DropdownModule} from "primeng/dropdown";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 const routes: Routes = [
   {
@@ -34,26 +35,27 @@ const routes: Routes = [
     ComunicacaoPerdaComponent,
     ComunicacaoPerdaListaComponent
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    RouterModule.forChild(routes),
-    CardModule,
-    AutoCompleteModule,
-    ScrollingModule,
-    AutoCompleteModule,
-    TableModule,
-    ProgressBarModule,
-    BreadcrumbModule,
-    ButtonModule,
-    ToastModule,
-    ReactiveFormsModule,
-    InputTextModule,
-    CalendarModule,
-    TranslateModule.forChild(),
-    AccordionModule,
-    FieldsetModule,
-    DropdownModule
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        RouterModule.forChild(routes),
+        CardModule,
+        AutoCompleteModule,
+        ScrollingModule,
+        AutoCompleteModule,
+        TableModule,
+        ProgressBarModule,
+        BreadcrumbModule,
+        ButtonModule,
+        ToastModule,
+        ReactiveFormsModule,
+        InputTextModule,
+        CalendarModule,
+        TranslateModule.forChild(),
+        AccordionModule,
+        FieldsetModule,
+        DropdownModule,
+        ConfirmDialogModule
+    ]
 })
 export class ComunicacaoPerdaModule { }

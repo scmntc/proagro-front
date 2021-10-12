@@ -47,7 +47,13 @@
               <div class="col-4 pl-0 p-fluid" [style.width]="'100%'">
                 <div class="col-12 flex flex-column p-0 p-fluid">
                   <label class="mb-1">Evento Ocorrido</label>
-                  <p-dropdown [editable]="false" [options]="eventos" formControlName="eventoOcorrido"></p-dropdown>
+                  <p-dropdown
+                    [editable]="false"
+                    [options]="eventos"
+                    (onChange)="onChangeEventoOcorrido($event)"
+                    (select)="onChangeEventoOcorrido($event)"
+                    formControlName="eventoOcorrido">
+                  </p-dropdown>
                 </div>
               </div>
             </div>
