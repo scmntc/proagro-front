@@ -68,6 +68,13 @@
 
             </tr>
           </ng-template>
+          <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+              <td [attr.colspan]="columns.length + 1" [style]="{'justify-content': 'center'}">
+                Não há registros.
+              </td>
+            </tr>
+          </ng-template>
         </p-table>
       </p-card>
     </p-card>

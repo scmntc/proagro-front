@@ -1,5 +1,7 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {NavigationStart, Router} from "@angular/router";
+import {environment} from "../environments/environment";
+import {HerokuEnvService} from "./services/heroku-env/heroku-env.service";
 
 
 /* Só para simular o acesso. */
@@ -23,7 +25,10 @@ export class AppComponent {
     return AppComponent.showNavBar;
   }
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private herokuEnvService: HerokuEnvService
+  ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart && this.validaAcessoUrl(event.url)) {
         AppComponent.showNavBar = true;
@@ -31,6 +36,9 @@ export class AppComponent {
         AppComponent.showNavBar = false;
       }
     });
+
+    this.herokuEnvService.getEnvironmentVariablesHeroku();
+
   }
 
   validaAcessoUrl(url: string): boolean {

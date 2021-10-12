@@ -14,8 +14,12 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es6",
+    "target": "es2015",
     "module": "commonJS",
+    "types": [
+      "node",
+      "jasmine"
+    ],
     "lib": [
       "es2018",
       "dom"
