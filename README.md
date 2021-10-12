@@ -1,27 +1,67 @@
-# ComunicacaoPerda
+<p align="center">
+  <img src="https://angular.io/assets/images/logos/angular/angular.png">
+</p>
+<p align="center">
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.3.
+  <a href="https://www.npmjs.com/@angular/core">
+    <img src="https://img.shields.io/badge/npm-v6.14.14-%232fba2f" alt="Angular on npm" />
+  </a>&nbsp;
+  <a href="https://github.com/scmntc">
+    <img alt="Feito pela Otavio Soares" src="https://img.shields.io/badge/Feito%20por-Otavio%20Soares-blueviolet">
+  </a>&nbsp;
+  <a href="https://material.angular.io/">
+    <img src="https://img.shields.io/badge/Prime%20NG-v12.2.0-blue">
+  </a>&nbsp;
+</p>
 
-## Development server
+# Proagro Fácil
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Projeto criado seguindo as especificações passadas para realização do teste.
 
-## Code scaffolding
+## Informações
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+O projeto foi adequado para rodar na plataforma do Heroku, sendo utilizado um servidor node com express para servir a aplicação.
 
-## Build
+### Tecnologias
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Foi utilizado para construção do projeto as seguintes tecnologias (principais):
+- Angular 12.2.8
+- PrimeNG 12.2.0
 
-## Running unit tests
+### Funcionalidades
+- CRUD de Produtores Rurais, com validações de E-mail e CPF.
+- CRUD de Comunicação de perda, sendo validado todos os campos na hora da inclusão.
+- Filtragem de Comunicação de perda por CPF do Produtor.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+</p>
 
-## Running end-to-end tests
+### Pré-requisitos
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- Instalar [Node.js] que já inclui [Node Package Manager][npm]
 
-## Further help
+### Rodando o Projeto
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Para o funcionamento desta aplicação é necessário subir em conjunto a API que se encontra em: <a href="https://github.com/scmntc/proagro-api">Proagro-API<a/>
+
+Instale o Angular CLI Globalmente:
+
+```
+npm install -g @angular/cli
+```
+
+Rodando a aplicação:
+
+```
+cd angular-project
+npm install
+ng serve
+```
+
+Ao acessar http://localhost:4200, será exibida a tela de login (Somente visual), não sendo necessário informar usuário e senha, basta clicar em Entrar.
+
+Após isso você já será direcionado para a tela de cadastro de Comunicação de Perda, antes de realizar algum cadastro de Comunicação de Perda é necessário primeiro cadastrar o Produtor Rural acessando a opção do menu Cadastros > Produtor Rural.
+
+## 🦸 Autor
+
+<a href="https://www.linkedin.com/in/otavio-augusto-soares-dos-passos-516a5114a/">
+ <img style="border-radius: 50%;" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" width="100px;"/>
