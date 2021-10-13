@@ -6,6 +6,7 @@ import {ComunicacaoPerda} from "../../../model/comunicacao-perda";
 import {Subject} from "rxjs";
 import {get} from 'lodash';
 import {Router} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-comunicacao-perda-lista',
@@ -30,8 +31,11 @@ export class ComunicacaoPerdaListaComponent implements OnInit {
     public service: ComunicacaoPerdaService,
     private route: Router,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
-  ) { }
+    private messageService: MessageService,
+    private title: Title
+  ) {
+    this.title.setTitle("Operações - Comunicação de Perda")
+  }
 
   ngOnInit(): void {
     this.cols = [
